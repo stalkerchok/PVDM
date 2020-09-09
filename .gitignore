@@ -127,3 +127,67 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# External tool builders
+.externalToolBuilders/**
+
+# CDT-specific
+.cproject
+
+# PDT-specific
+.buildpath
+
+# STS-specific
+/.sts4-cache/*
+
+######################
+# IntelliJ
+######################
+.idea/
+*.iml
+*.iws
+*.ipr
+*.ids
+*.orig
+classes/
+out/
+
+######################
+# Windows
+######################
+# Windows image file caches
+Thumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+######################
+# Directories
+######################
+/bin/
+/deploy/
+
+######################
+# Logs
+######################
+*.log*
+
+######################
+# Others
+######################
+*.class
+*.*~
+*~
+.merge_file*
+
+######################
+# ESLint
+######################
+.eslintcache
