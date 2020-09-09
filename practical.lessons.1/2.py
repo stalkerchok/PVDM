@@ -1,17 +1,13 @@
 # coding=utf-8
-def swap(text):
+def swap(string):
     # -------------------------------
     # Реализовать программу, которая получает на вход строку, содержащую 2 слова через пробел.
     # На выходе программа должна выводить эти же слова в обратном порядке.
     # При решении не стоит пользоваться условными операторами if и циклами (for, while).
     # -------------------------------
-    array = text.split(' ')
-    if len(array) == 2:
-        first_word = array[0]
-        second_word = array[1]
-        print(second_word + ' ' + first_word)
-    else:
-        print('В строке больше 2 слов!')
+    array = string.split(' ', 1)
+    first_word, second_word = array[0], array[1]
+    print(second_word + ' ' + first_word)
 
 
 swap('One Two')
