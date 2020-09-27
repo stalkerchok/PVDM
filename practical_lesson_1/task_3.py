@@ -1,5 +1,5 @@
 # coding=utf-8
-def check_sequence(sequence):
+def is_unique_sequence(sequence):
     # -------------------------
     # Реализовать программу, которая будет проверять последовательность чисел на уникальность и
     # выводить фразу «Все числа в последовательности уникальны» и
@@ -7,8 +7,10 @@ def check_sequence(sequence):
     # --------------------------
     if len(sequence) == len(set(sequence)):
         print('Все числа в последовательности уникальны')
+        return True
     else:
         print('Указана неуникальная последовательность')
+        return False
 
 
-check_sequence([1, 2, 3, 4, 5, 6, 7, 8])
+is_unique_sequence([1, 2, 3, 4, 5, 6, 7, 8])

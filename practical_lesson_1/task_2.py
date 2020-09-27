@@ -1,13 +1,14 @@
 # coding=utf-8
-def swap(string):
+def swap_two_words(input_string):
     # -------------------------------
     # Реализовать программу, которая получает на вход строку, содержащую 2 слова через пробел.
     # На выходе программа должна выводить эти же слова в обратном порядке.
     # При решении не стоит пользоваться условными операторами if и циклами (for, while).
     # -------------------------------
-    array = string.split(' ', 1)
-    first_word, second_word = array[0], array[1]
-    print(second_word + ' ' + first_word)
+    array = input_string.split(' ', 1)
+    output_string = array[1] + ' ' + array[0]
+    print(output_string)
+    return output_string
 
 
-swap('One Two')
+swap_two_words('One Two')
