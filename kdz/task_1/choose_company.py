@@ -3,6 +3,14 @@ import numpy as np
 
 
 def make_decision(array):
+    # --------------------
+    # Планируется строительство одного из 4х типов промышленного предприятия. Эффективность каждого типа предприятия
+    # зависит от различных факторов. Предполагается, что выделено 4 различных состояния, каждое из которых означает
+    # определенное сочетание внешних факторов, влияющих на эффективность строящегося объекта. Экономическая
+    # эффективность отдельных типов предприятия задана матрицей А.
+    # Принять решение о выборе типа предприятия на основе матрицы «голосования», используя критерии Вальда, Сэвиджа,
+    # Гурвица ( ), Лапласа.
+    # --------------------
     A = np.array(array).astype(float)
     A = A.reshape(4, 4)
     print 'Матрица A:\n', A
@@ -16,6 +24,7 @@ def make_decision(array):
     decision_matrix = add_decisions(hurwitz_decisions, decision_matrix)
     decision_matrix = add_decisions(laplace_decisions, decision_matrix)
     print 'Матрица голосования:\n', decision_matrix
+    # Из матрицы голосования выбираются все максимальные элементы
     maximums = [i for i in range(len(decision_matrix)) if decision_matrix[i] == max(decision_matrix)]
     print 'Выбрано преприятие: ', maximums
     if len(maximums) > 1:
@@ -83,6 +92,12 @@ def laplace(A):
 
 
 def add_decisions(decisions, matrix):
+    # --------------------
+    # На основе чисел из массива decisions увеличивает на 1 элементы массива matrix
+    # Пример.
+    # На вход метода подаётся: decisions = [1, 2] matrix = [0, 0, 0, 0]
+    # На выходе метода получаем: matrix = [0, 1, 1, 0]
+    # --------------------
     for decision in decisions:
         matrix[decision] = matrix[decision] + 1
     return matrix
