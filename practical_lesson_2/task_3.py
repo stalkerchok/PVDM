@@ -1,8 +1,12 @@
+# coding=utf-8
 import unittest
 from practical_lesson_1 import task_1, task_2, task_3
 
 
 class TestTasks(unittest.TestCase):
+    # --------------------
+    # Реализовать юнит-тесты с использованием пакета unittest для задач первой лекции (1,2,3).
+    # --------------------
     def test_task_1(self):
         input_array = [4, 156, 65, 77, 90, 986, 537, 3423, 11, 237, 1234, 523, 3456]
         output_array = [4, 156, 90, 986]
