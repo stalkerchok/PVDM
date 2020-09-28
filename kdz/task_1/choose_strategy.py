@@ -105,6 +105,5 @@ def add_decisions(decisions, matrix):
 
 
 A_matrix = np.array([10, 6, 3, 2, 10, 5, 4, 8, 7, 7, 2, 3, 3, 8, 6, 5])
-# A_matrix = np.array([10, 6, 3, 2, 10, 5, 4, 8, 7, 7, 2, 3])
 A_matrix = A_matrix.reshape(4, 4)
 make_decision(A_matrix, 0.6)
