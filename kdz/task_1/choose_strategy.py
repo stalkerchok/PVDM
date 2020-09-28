@@ -1,8 +1,10 @@
 # coding=utf-8
 import numpy as np
 
+alpha = 0.6
 
-def make_decision(array):
+
+def make_decision(A, alpha_value):
     # --------------------
     # Планируется строительство одного из 4х типов промышленного предприятия. Эффективность каждого типа предприятия
     # зависит от различных факторов. Предполагается, что выделено 4 различных состояния, каждое из которых означает
@@ -11,10 +13,10 @@ def make_decision(array):
     # Принять решение о выборе типа предприятия на основе матрицы «голосования», используя критерии Вальда, Сэвиджа,
     # Гурвица ( ), Лапласа.
     # --------------------
-    A = np.array(array).astype(float)
-    A = A.reshape(4, 4)
+    global alpha
+    alpha = alpha_value
     print 'Матрица A:\n', A
-    decision_matrix = [0, 0, 0, 0]
+    decision_matrix = [0]*len(A)
     wald_decisions = wald(A)
     savage_decisions = savage(A)
     hurwitz_decisions = hurwitz(A)
@@ -49,7 +51,7 @@ def savage(A):
     R = A.copy()
     for i in range(len(A)):
         for j in range(len(A[i])):
-            R[j][i] = max_a[i] - R[j][i]
+            R[i][j] = max_a[j] - R[i][j]
     print 'Матрица R:\n', R
     max_a = np.max(R, axis=1)
     print 'Максимальные значения для каждой строки:', max_a
@@ -61,7 +63,6 @@ def savage(A):
 
 
 def hurwitz(A):
-    alpha = 0.6
     print 'Критерий Гурвица'
     max_a = np.max(A, axis=1)
     print 'Максимальные значения для каждой строки:', max_a
@@ -78,8 +79,8 @@ def hurwitz(A):
 
 def laplace(A):
     print 'Критерий Лапласа'
-    n = 4
-    D = A.copy()
+    n = len(A)
+    D = A.copy().astype(float)
     D = D/n
     print 'Матрица D\n', D
     sum_d = np.sum(D, axis=1)
@@ -103,4 +104,7 @@ def add_decisions(decisions, matrix):
     return matrix
 
 
-make_decision([10, 6, 3, 2, 10, 5, 4, 8, 7, 7, 2, 3, 3, 8, 6, 5])
+A_matrix = np.array([10, 6, 3, 2, 10, 5, 4, 8, 7, 7, 2, 3, 3, 8, 6, 5])
+# A_matrix = np.array([10, 6, 3, 2, 10, 5, 4, 8, 7, 7, 2, 3])
+A_matrix = A_matrix.reshape(4, 4)
+make_decision(A_matrix, 0.6)
