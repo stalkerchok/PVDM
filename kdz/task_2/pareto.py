@@ -21,10 +21,14 @@ E15 = Efficiency([13, 10, 4, 2], [0.3, 0.1, 0.1, 0.5])
 E16 = Efficiency([12, 10, 9, 4], [0.1, 0.5, 0.2, 0.2])
 
 
-def choose_project(efficiency_array):
+def pareto(efficiency_array):
     projects = create_projects(efficiency_array)
-    print_projects(projects)
     print_graph(projects)
+    calculate_b(projects)
+    calculate_f(projects)
+    print_projects(projects)
+    selected_projects = choose_projects(projects)
+    print selected_projects
 
 
 def create_projects(efficiency_array):
@@ -53,6 +57,27 @@ def calculate_sigma(x, p):
     return sigma
 
 
+def calculate_b(projects):
+    for project in projects:
+        b = 0
+        M = project.M
+        sigma = project.sigma
+        for comparable_project in projects:
+            if comparable_project.M >= M and comparable_project.sigma <= sigma and not (comparable_project.M == M and comparable_project.sigma == sigma):
+                b = b + 1
+        project.set_b(b)
+    return projects
+
+
+def calculate_f(projects):
+    N = float(len(projects))
+    for project in projects:
+        b = float(project.b)
+        F = float(1/(1 + b/(N - 1)))
+        project.set_f(F)
+    return projects
+
+
 def print_graph(projects):
     M = []
     sigma = []
@@ -63,6 +88,18 @@ def print_graph(projects):
     plt.show()
 
 
+def choose_projects(projects):
+    max_f = 0.0
+    for project in projects:
+        if project.F > max_f:
+            max_f = project.F
+    selected_projects = []
+    for project in projects:
+        if project.F == max_f:
+            selected_projects.append(project.name)
+    return selected_projects
+
+
 def print_projects(projects):
     print '=================================================================================='
     for project in projects:
@@ -70,7 +107,9 @@ def print_projects(projects):
         print 'efficiency', project.efficiency.__dict__
         print 'M', project.M
         print 'sigma', project.sigma
+        print 'b', project.b
+        print 'F', project.F
         print '=================================================================================='
 
 
-choose_project([E2, E3, E8, E9, E10, E11, E12, E15, E10, E11, E1, E2, E4, E9, E12, E13])
+pareto([E2, E3, E8, E9, E10, E11, E12, E15, E10, E11, E1, E2, E4, E9, E12, E13])
